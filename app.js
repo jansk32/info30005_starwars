@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 
 const port = process.env.PORT || 3000;
+
+app.use(bodyParser.json());
 
 var characters = [
     {
@@ -204,6 +207,61 @@ var characters = [
         res.send(characters[req.params.id]);
     })
 
+    // app.post('/add',function(req,res){
+    //     var newChar = {
+    //         name: req.body.name,
+    //         height: req.body.height,
+    //         mass: req.body.mass,
+    //         hair_color: req.body.hair_color,
+    //         skin_color: req.body.skin_color,
+    //         eye_color: req.body.eye_color,
+    //         birth_year: req.body.birth_year,
+    //         gender: req.body.gender,
+    //         homeworld: req.body.homeworld,
+    //         films: req.body.films,
+    //         species: req.body.species,
+    //         vehicles: req.body.vehicles,
+    //         starships: req.body.starships,
+    //         created: req.body.created,
+    //         edited: req.body.edited,
+    //         url: req.body.url
+    //     }
+    //     res.send(newChar);
+    // })
+    // app.post('/a]ddit',function(req,res){
+    //     var newChar = {
+	// 		"name": "R5-D4",
+	// 		"height": "97",
+	// 		"mass": "32",
+	// 		"hair_color": "n/a",
+	// 		"skin_color": "white, red",
+	// 		"eye_color": "red",
+	// 		"birth_year": "unknown",
+	// 		"gender": "n/a",
+	// 		"homeworld": "https://swapi.co/api/planets/1/",
+	// 		"films": [
+	// 			"https://swapi.co/api/films/1/"
+	// 		],
+	// 		"species": [
+	// 			"https://swapi.co/api/species/2/"
+	// 		],
+	// 		"vehicles": [],
+	// 		"starships": [],
+	// 		"created": "2014-12-10T15:57:50.959000Z",
+	// 		"edited": "2014-12-20T21:17:50.321000Z",
+	// 		"url": "https://swapi.co/api/people/8/"
+    //     };
+    //     characters.push(newChar);
+    //     res.send(newChar);
+    //     console.log("Character added.");
+    // });
+
+    app.delete('/delete/:id', function(req,res){
+        if(req.params.id < characters.length -1){
+            characters.splice(req.params.id,1);
+        }
+        res.send(characters);
+    })
 
     app.listen(port, function(){
         console.log("Done");
